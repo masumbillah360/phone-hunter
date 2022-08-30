@@ -5,9 +5,9 @@ const dataLoader = async(searchKey)=>{
 }
 dataLoader();
 
-
 const dataViewer = (phones) =>{
-    phones.forEach(phone => {
+    const  slicePhone = phones.slice(0,12);
+    slicePhone.forEach(phone => {
         const {brand,phone_name,slug,image} = phone;
         const phoneContainer = document.getElementById('phone-container');
         const phoneCard = document.createElement('article');
