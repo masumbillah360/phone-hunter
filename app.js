@@ -1,4 +1,4 @@
-const dataLoader = async(searchKey)=>{
+const dataLoader = async(searchKey = 'apple')=>{
     const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchKey}`);
     const data = await res.json();
     dataViewer(data.data);
