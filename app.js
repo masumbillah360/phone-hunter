@@ -35,3 +35,11 @@ for (const btn of btnGroup) {
         dataLoader(searchKey);
     })   
 }
+
+document.getElementById('search-btn').addEventListener('click',()=>{
+    document.getElementById('phone-container').textContent = '';
+    const searchKey = document.getElementById('search-key').value;
+    const searchText = searchKey.toLowerCase();
+    dataLoader(searchText);
+
+})
