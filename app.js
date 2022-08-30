@@ -1,13 +1,18 @@
-const dataLoader = async(searchKey = 'apple')=>{
-    const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchKey}`);
-    const data = await res.json();
-    dataViewer(data.data);
+const dataLoader = async(searchKey='a')=>{
+        const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchKey}`);
+        const data = await res.json();
+        dataViewer(data.data);
 }
-dataLoader();
+
 
 const dataViewer = (phones) =>{
-    const  slicePhone = phones.slice(0,12);
-    slicePhone.forEach(phone => {
+    if (phones.length==0) {
+        document.getElementById('error-msg').classList.remove('d-none');
+    }
+    else{
+        document.getElementById('error-msg').classList.add('d-none');
+        const  slicePhone = phones.slice(0,12);
+        slicePhone.forEach(phone => {
         const {brand,phone_name,slug,image} = phone;
         const phoneContainer = document.getElementById('phone-container');
         const phoneCard = document.createElement('article');
@@ -21,10 +26,11 @@ const dataViewer = (phones) =>{
                 <p class="card-text">Model : ${slug}</p>
             </div>
         </div>
-        `
-        phoneContainer.appendChild(phoneCard);
-    });
-}
+                `
+                phoneContainer.appendChild(phoneCard);
+            });
+        }
+    }
 
 const btnGroup = document.getElementsByClassName('s-phone');
 for (const btn of btnGroup) {
@@ -41,5 +47,13 @@ document.getElementById('search-btn').addEventListener('click',()=>{
     const searchKey = document.getElementById('search-key').value;
     const searchText = searchKey.toLowerCase();
     dataLoader(searchText);
-
 })
+document.getElementById('search-key').addEventListener('keyup',(e)=>{
+    if (e.key === 'Enter') {
+        document.getElementById('phone-container').textContent = ''
+        const searchKey = e.target.value;
+        dataLoader(searchKey);
+    }
+})
+
+dataLoader();
