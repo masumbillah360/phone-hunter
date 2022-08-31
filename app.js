@@ -105,3 +105,14 @@ const phoneDetailViwer = (data) =>{
     
     `
 }
+const btnGroup = document.getElementsByClassName('slct-btn');
+for (const btn of btnGroup) {
+    btn.addEventListener('click',(e)=>{
+        document.getElementById('phone-container').textContent = '';
+        const btnText = e.target.innerText;
+        const searchKey = btnText.toLowerCase();
+        dataLoad(searchKey);
+        processSearch(10)
+    })   
+}
+
