@@ -3,8 +3,6 @@ const dataLoad =async(searchText,dataLimit)=>{
     const data = await res.json();
     displayData(data.data,dataLimit);
 }
-// dataLoad('apple',6);
-
 
 const phonDivContainer = document.getElementById('phone-container');
 const displayData =(phones,dataLimit)=>{
@@ -110,9 +108,8 @@ for (const btn of btnGroup) {
     btn.addEventListener('click',(e)=>{
         document.getElementById('phone-container').textContent = '';
         const btnText = e.target.innerText;
-        const searchKey = btnText.toLowerCase();
-        dataLoad(searchKey);
-        processSearch(10)
+        dataLoad(btnText);
     })   
 }
 
+dataLoad('apple');
